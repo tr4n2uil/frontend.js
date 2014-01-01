@@ -992,4 +992,9 @@
 		[ 'click', 'a.popup', window.open_popup ],
 	] );
 
+	// fix facebook login bug
+	if(window.location.hash == "#_=_"){
+		history.pushState("", document.title, window.location.pathname + window.location.search);
+	}
+
 } )( window, jQuery );
