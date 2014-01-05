@@ -499,7 +499,7 @@
 	// fix placeholder
 	window.fix_placeholder = function(){
 		//fix html5 placeholder attribute for ie7 & ie8
-		if( $.browser.msie && $.browser.version.substr(0, 1) < 9 ){ // ie7&ie8
+		if( $.browser && $.browser.msie && $.browser.version.substr(0, 1) < 9 ){ // ie7&ie8
 			$( 'input[placeholder], textarea[placeholder]' ).each( function (){
 				var input = $( this );
 
@@ -984,13 +984,13 @@
 		if( width/height > 4/3 ){
 			base_wide = window.base_wide || 60;
 			wide = ( height * 16 * base_wide )/( 900 );
-			font_size = wide * width / 4000;
+			font_size = wide / 40;
 		}
 
 		$( '.body' ).width( wide );
 
 		var stylesheet = document.styleSheets[ document.styleSheets.length - 1 ],
-			selector = "body, input", rule = "{ font-size: "+ size +"}";
+			selector = "body, input", rule = "{ font-size: "+ font_size +"px; }";
 
 		if( stylesheet.insertRule ){
 			stylesheet.insertRule( selector + rule, stylesheet.cssRules.length );
