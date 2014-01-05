@@ -992,10 +992,12 @@
 		$( '.body' ).width( wide );
 
 		if( width/height < 4/3 ){
-			$( '.canvas' ).css( 'padding-right', ( width - wide )/2 );
+			var cwide = (95 * (100)/(100 - base_subpart) - 5) * wide / 100;
+			$( '.canvas' ).width( cwide ).css( 'padding-right', ( width - wide )/2 );
+			wide = cwide;
 		}
 		else {
-			$( '.canvas' ).css( 'margin-right', 0 );
+			$( '.canvas' ).width( wide ).css( 'margin-right', 0 );
 		}
 
 		var font_size = wide / base_divider;
