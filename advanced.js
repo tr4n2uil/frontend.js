@@ -978,17 +978,19 @@
 		var width = viewport[ 0 ];
 		var height = viewport[ 1 ];
 
-		var wide = width;
-		var font_size = width/40;
+		var base_wide = window.base_wide || 60;
+		var base_divider = window.base_divider | 40;
 
-		if( width/height > 4/3 ){
+		var wide = width;
+
+		if( width > height ){
 			base_wide = window.base_wide || 60;
 			wide = ( height * 16 * base_wide )/( 900 );
-			font_size = wide / 40;
 		}
 
 		$( '.body' ).width( wide );
 
+		var font_size = wide / base_divider;
 		var stylesheet = document.styleSheets[ document.styleSheets.length - 1 ],
 			selector = "body, input", rule = "{ font-size: "+ font_size +"px; }";
 
