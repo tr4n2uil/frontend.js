@@ -972,6 +972,41 @@
 		return false;
 	}
 
+	// update viewport resize
+	window.update_viewport = function(){
+		var viewport = get_viewport();
+		var width = viewport[ 0 ];
+		var height = viewport[ 1 ];
+
+		var wide = width;
+		var font_size = width/40;
+
+		if( width/height > 4/3 ){
+			base_wide = window.base_wide || 60;
+			wide = ( height * 16 * base_wide )/( 900 );
+			font_size = wide * width / 4000;
+		}
+
+		$( '.body' ).width( wide );
+
+		var stylesheet = document.styleSheets[ document.styleSheets.length - 1 ],
+			selector = "body, input", rule = "{ font-size: "+ size +"}";
+
+		if( stylesheet.insertRule ){
+			stylesheet.insertRule( selector + rule, stylesheet.cssRules.length );
+		} 
+		else if( stylesheet.addRule ){
+			stylesheet.addRule( selector, rule, -1 );
+		}
+
+		//$( 'body' ).css( 'font-size', size );
+		//$( 'input' ).css( 'font-size', size );
+
+		if( document.body.scrollHeight <= viewport[ 1 ] ){
+			$( 'fixed-bottom' ).addClass( 'fixed-bottom-done' );
+		}
+	}
+
 	// call bind events
 	window.bind_events( [
 		[ 'submit', 'form.quickload', window.iframe_load ],
