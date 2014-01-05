@@ -979,7 +979,8 @@
 		var height = viewport[ 1 ];
 
 		var base_wide = window.base_wide || 60;
-		var base_divider = window.base_divider | 40;
+		var base_divider = window.base_divider | 45;
+		var base_subpart = window.base_subpart || 40;
 
 		var wide = width;
 
@@ -989,6 +990,13 @@
 		}
 
 		$( '.body' ).width( wide );
+
+		if( width/height < 4/3 ){
+			$( '.canvas' ).css( 'padding-right', ( width - wide )/2 );
+		}
+		else {
+			$( '.canvas' ).css( 'margin-right', 0 );
+		}
 
 		var font_size = wide / base_divider;
 		var stylesheet = document.styleSheets[ document.styleSheets.length - 1 ],
