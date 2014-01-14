@@ -1015,7 +1015,7 @@
 		//$( 'input' ).css( 'font-size', size );
 
 		if( document.body.scrollHeight <= viewport[ 1 ] ){
-			$( 'fixed-bottom' ).addClass( 'fixed-bottom-done' );
+			$( '.fixed-bottom' ).addClass( 'fixed-bottom-done' );
 		}
 	}
 
