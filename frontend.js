@@ -988,9 +988,6 @@
 			base_wide = window.base_wide || 60;
 			wide = ( height * 16 * base_wide )/( 900 );
 		}
-		else {
-			wide = width - 20;
-		}
 
 		$( '.body' ).width( wide );
 
