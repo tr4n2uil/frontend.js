@@ -95,7 +95,7 @@ angular.module( 'API', [] )
 					console.log('check session: ' + user);
 					if(user){
 						API.Scope.user = user;
-						console.log("Logged In " + user.first_name);
+						console.log("Logged In " + user.username);
 						if($location.path() == '/'){
 							$location.path(API.Helpers.path());
 						}
@@ -126,9 +126,9 @@ angular.module( 'API', [] )
 				},
 
 				logout: function(callback){
-			    	console.log(API.Scope.user.type);
+			    	console.log(API.Scope.user.username);
 			    	API.Scope.loader = true;
-					API.Resources.Session.remove({id: API.Scope.user.type}).$promise.then(
+					API.Resources.Session.remove({id: API.Scope.user.username}).$promise.then(
 						function(data){
 							API.Scope.loader = false;
 							API.Scope.user = undefined;
