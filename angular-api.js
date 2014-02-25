@@ -1,13 +1,3 @@
-/**
- *	angular-api.js Angular API script file
- *
- *	Vibhaj Rajan <vibhaj8@gmail.com>
- *
- *	Licensed under MIT License 
- *	http://www.opensource.org/licenses/mit-license.php
- *
-**/
-
 angular.module( 'API', [] )
 	.factory( 'API', [ '$rootScope', '$location', '$route', '$routeParams', 
 		function($rootScope, $location, $route, $routeParams){
@@ -17,16 +7,16 @@ angular.module( 'API', [] )
 			API.Scope = $rootScope;
 
 			API.REST = {
-		    	query: function(resource, key, params, callback){
+				query: function(resource, key, params, callback){
 		    		API.Scope.loader = true;
 		    		API.Scope[key] = false;
-		    		var params = params || { id:$routeParams.id };
-		            API.Resources[resource].get(params)
+		    		var params = params || {id: $routeParams.id};
+		            API.Resources[resource].query(params)
 		            	.$promise.then(
 			                function(data){
-			                    console.log(data);
+			                    console.log('API Query: '+JSON.stringify(data.objects || data));
 			                    API.Scope.loader = false;
-			                    API.Scope[key] = data;
+			                    API.Scope[key] = data.objects || data;
 			                    if(callback) callback();
 			                }, 
 			                function(data){
@@ -47,7 +37,7 @@ angular.module( 'API', [] )
 		            API.Resources[resource].create(object)
 		            	.$promise.then(
 			                function(data){
-			                    console.log(data);
+			                    console.log('API Create: '+JSON.stringify(data));
 			                    API.Scope.loader = false;
 			                    API.Helpers.popup(block, true);
 			                    $route.reload();
@@ -66,7 +56,7 @@ angular.module( 'API', [] )
 		            API.Resources[resource].update(object)
 		            	.$promise.then(
 			                function(data){
-			                    console.log(data);
+			                    console.log('API Update: '+JSON.stringify(data));
 			                    API.Scope.loader = false;
 			                    API.Helpers.popup(block, true);
 			                    if(callback) callback();
@@ -85,7 +75,7 @@ angular.module( 'API', [] )
 		        	API.Resources[resource].remove({id:object.id})
 		            	.$promise.then(
 			                function(data){
-			                    console.log(data);
+			                    console.log('API Remove: '+JSON.stringify(data));
 			                    API.Scope.loader = false;
 			                    API.Helpers.popup(block, true);
 			                    $(element+object.id).remove();
